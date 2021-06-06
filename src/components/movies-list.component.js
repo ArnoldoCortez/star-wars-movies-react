@@ -5,17 +5,18 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import { ThemeContext, LanguageContext } from "./App";
+import { ThemeContext } from "../App";
+import Button from "@material-ui/core/Button";
 
 function MoviesList({ additionalMovies }) {
   const [state, setState] = useState({
     movies: [],
     loading: false
   });
+
   const [displayTitle, setDisplayTitle] = useState("");
   const theme = useContext(ThemeContext);
-  const language = useContext(LanguageContext);
-  console.log("language ", language);
+
   useEffect(() => {
     /// serviceX.subscribe(user);
     setState({ ...state, loading: true });
@@ -38,11 +39,7 @@ function MoviesList({ additionalMovies }) {
       });
     }
   }, [additionalMovies]);
-  useEffect(() => {
-    const newDisplayTitle =
-      language === "en/us" ? "Star War movies" : "Peliculas de Star Wars";
-    setDisplayTitle(newDisplayTitle);
-  }, [language]);
+
   const textStyle = {
     color: theme.foreground
   };
@@ -58,6 +55,7 @@ function MoviesList({ additionalMovies }) {
                 <CardContent>
                   <h4 style={textStyle}>{movie.director}</h4>
                 </CardContent>
+                <Button color='secondary' >See details</Button>
               </Card>
             </Grid>
           );

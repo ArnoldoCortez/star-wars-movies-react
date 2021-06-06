@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import CreateMovie from "./create-movie-fn";
-import MoviesList from "./movies-list-fn";
+import CreateMovie from "./components/create-movie.component";
+import MoviesList from "./components/movies-list.component";
 
 /** Copied from React docs, don't touch!!!! */
 const themes = {
@@ -15,13 +15,7 @@ const themes = {
   }
 };
 
-const languages = {
-  english: "en/us",
-  spanish: "es/mx"
-};
-
 export const ThemeContext = React.createContext(themes.light);
-export const LanguageContext = React.createContext(languages.english);
 
 export default function App() {
   const [createdMovies, setCreatedMovies] = useState([]);
@@ -30,12 +24,10 @@ export default function App() {
   }
   return (
     <ThemeContext.Provider value={themes.dark}>
-      <LanguageContext.Provider value={languages.spanish}>
-        <div className="App">
-          <MoviesList additionalMovies={createdMovies} />
-          <CreateMovie createMovieFn={createMovieFn} />
-        </div>
-      </LanguageContext.Provider>
+      <div className="App">
+        <MoviesList additionalMovies={createdMovies} />
+        <CreateMovie createMovieFn={createMovieFn} />
+      </div>
     </ThemeContext.Provider>
   );
 }

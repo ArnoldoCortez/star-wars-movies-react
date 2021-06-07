@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,13 +8,12 @@ import axios from "axios";
 import { ThemeContext } from "../App";
 import Button from "@material-ui/core/Button";
 
-function MoviesList({ additionalMovies }) {
+function MoviesList({ additionalMovies, handleDetails }) {
   const [state, setState] = useState({
     movies: [],
     loading: false
   });
 
-  const [displayTitle, setDisplayTitle] = useState("");
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
@@ -44,8 +43,7 @@ function MoviesList({ additionalMovies }) {
     color: theme.foreground
   };
   return (
-    <>
-      <h4>{displayTitle}</h4>
+    <Fragment>
       <Grid container spacing={3}>
         {state.movies.map((movie) => {
           return (
@@ -55,13 +53,13 @@ function MoviesList({ additionalMovies }) {
                 <CardContent>
                   <h4 style={textStyle}>{movie.director}</h4>
                 </CardContent>
-                <Button color='secondary' >See details</Button>
+                <Button onClick={ () => handleDetails(movie) } color='secondary'> See details </Button>
               </Card>
             </Grid>
           );
         })}
       </Grid>
-    </>
+    </Fragment>
   );
 }
 

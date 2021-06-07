@@ -25,6 +25,7 @@
   word-spacing: 10px;
   font-size: 25px;
   transform: rotateX(40deg);
+  animation: animateCrawl 25s ease-in;
 }
 
 .details h1{
@@ -40,3 +41,17 @@
   margin: 0;
   margin-top: 20px;
 }
+
+.details h4 {
+  margin:0;
+  margin-top: 20px;
+}
+
+.details span {
+  text-align: center;
+}
+
+@keyframes animateCrawl {
+  0% { transform: rotateX(40deg) translateY(320px); }
+  100% { transform: rotateX(40deg) translateY(-1150px); }
+ }
